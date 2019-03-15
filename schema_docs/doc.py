@@ -1,7 +1,7 @@
 from schema_docs.exceptions import InvalidSchemaDocException
-from .i import ISchemaDoc
-from .caster import SchemaDocCaster
-from .validation import SchemaDocValidator
+from schema_docs.i import ISchemaDoc
+from schema_docs.caster import SchemaDocCaster
+from schema_docs.validation import SchemaDocValidator
 
 class SchemaDoc(ISchemaDoc):
     """ Документ """

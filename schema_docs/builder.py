@@ -1,6 +1,6 @@
-from .i import ISchemaDocBuilder, ISchemaDocNamespace
-from .doc import SchemaDoc
-from .namespace import SchemaDocNamespace
+from schema_docs.i import ISchemaDocBuilder, ISchemaDocNamespace
+from schema_docs.doc import SchemaDoc
+from schema_docs.namespace import SchemaDocNamespace
 
 
 class SchemaDocBuilder(ISchemaDocBuilder):

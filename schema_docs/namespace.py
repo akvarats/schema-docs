@@ -1,4 +1,4 @@
-from .i import ISchemaDocNamespace
+from schema_docs.i import ISchemaDocNamespace
 
 
 class SchemaDocNamespace(ISchemaDocNamespace):

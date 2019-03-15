@@ -1,1 +1,1 @@
-from .api import build_schemadoc_namespace
+from schema_docs.api import build_schemadoc_namespace

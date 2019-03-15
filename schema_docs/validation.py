@@ -3,7 +3,7 @@ from typing import Optional, List
 from schema_docs.utils import defaulted_field_def_param, field_def_param, zero_uuid, is_empty_date, is_empty_datetime
 
 
-from .i import ISchemaDoc, ISchemaDocFailedValidation, ISchemaDocValidator, ISchemaDocValidationRule
+from schema_docs.i import ISchemaDoc, ISchemaDocFailedValidation, ISchemaDocValidator, ISchemaDocValidationRule
 
 
 class SchemaDocValidator(ISchemaDocValidator):

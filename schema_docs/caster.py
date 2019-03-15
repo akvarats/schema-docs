@@ -5,8 +5,8 @@ import uuid
 import datetime
 
 
-from .i import ISchemaDocCaster, ISchemaDoc
-from .exceptions import SchemaDocFieldException
+from schema_docs.i import ISchemaDocCaster, ISchemaDoc
+from schema_docs.exceptions import SchemaDocFieldException
 from schema_docs.utils import field_def_param, safe_iso_to_date, date_to_iso, safe_iso_to_datetime, datetime_to_iso, \
     iso_to_date, iso_to_datetime,  safe_str_to_uuid, uuid_to_str, to_uuid
 
