@@ -10,5 +10,8 @@ setup(
     author_email='akvarats@gmail.com',
     url='https://github.com/akvarats/schema_docs',
     license="",
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    install_requires=[
+        "python-dateutil"
+    ]
 )
