@@ -3,6 +3,7 @@ from schema_docs.i import ISchemaDoc
 from schema_docs.caster import SchemaDocCaster
 from schema_docs.validation import SchemaDocValidator
 
+
 class SchemaDoc(ISchemaDoc):
     """ Документ """
 
@@ -10,6 +11,9 @@ class SchemaDoc(ISchemaDoc):
         self._cast = SchemaDocCaster()
         self._validator = SchemaDocValidator()
         self._data = dict()
+
+        if "options" in self.schema:
+            self.setup(**self.schema["options"])
 
         if args and isinstance(args[0], dict):
             self.from_dict(args[0])
@@ -68,3 +72,8 @@ class SchemaDoc(ISchemaDoc):
             raise InvalidSchemaDocException(failed_validations=failed_validations)
 
         return not failed_validations
+
+    def setup(self, **options):
+        if "soft_numbers" in options:
+            self._cast.allow_number_as_string = True
+        return self

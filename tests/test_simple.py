@@ -10,6 +10,7 @@ class SimpleTests(unittest.TestCase):
     def test_creation(self):
         schema = [{
             'name': 'Document',
+            "options": {"soft-numbers": True},
             'fields': {
                 'date': 'date'
             }

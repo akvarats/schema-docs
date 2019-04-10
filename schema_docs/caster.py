@@ -14,6 +14,7 @@ from schema_docs.utils import field_def_param, safe_iso_to_date, date_to_iso, sa
 class SchemaDocCaster(ISchemaDocCaster):
 
     def __init__(self):
+        self._allow_number_as_string = False
         self.MAP_FROM_EXT = {
             'string': self._from_ext_string,
             'str': self._from_ext_string,
@@ -78,6 +79,14 @@ class SchemaDocCaster(ISchemaDocCaster):
 
         self._raise_not_implemented(value, field_name, field_def)
 
+    @property
+    def allow_number_as_string(self) -> bool:
+        return self._allow_number_as_string
+
+    @allow_number_as_string.setter
+    def allow_number_as_string(self, value: bool):
+        self._allow_number_as_string = value
+
     # ------------------------------------------------------------------------------------------------------------------
     # Методы преобразования значений из внешнего типа
     # ------------------------------------------------------------------------------------------------------------------
@@ -94,7 +103,19 @@ class SchemaDocCaster(ISchemaDocCaster):
         :param doc:
         :return:
         """
-        self._check_value_type(value, field_name, field_def, (int, float, decimal.Decimal))
+        allowed_types = (int, float, decimal.Decimal,)
+        if self.allow_number_as_string:
+            allowed_types = allowed_types + (str, )
+
+        self._check_value_type(value, field_name, field_def, allowed_types)
+
+        if isinstance(value, str):
+            # пробуем преобразовать в decimal, чтобы потом чуть ниже прочиталось в
+            try:
+                value = decimal.Decimal(value)
+            except decimal.InvalidOperation:
+                # некорректное значение
+                self._raise_type_error(value, field_name, field_def)
 
         if isinstance(value, decimal.Decimal):
             return int(value) if value % 1 == 0 else float(value)

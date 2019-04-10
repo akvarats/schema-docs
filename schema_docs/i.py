@@ -17,6 +17,9 @@ class ISchemaDoc(object):
     ns = None
     schema = None
 
+    def setup(self, **options):
+        """ Настраивает что-то там в документе """
+
     def from_dict(self, value: dict):
         """ Формирует объект из "чистого" словаря (в котором данные уже содержатся в нужных форматах) """
 
@@ -68,6 +71,11 @@ class ISchemaDocCaster(object, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def to_ext(self, value, field_name: str, field_def: dict, doc: ISchemaDoc):
         """ Преобразование значения из внутренного представления во внутреннее """
+
+    @property
+    @abc.abstractmethod
+    def allow_number_as_string(self) -> bool:
+        """ Возвращает True, если присваивание числовому полю значения нормального числа, но в строке допустимо """
 
 
 class ISchemaDocValidator(object, metaclass=abc.ABCMeta):
